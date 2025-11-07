@@ -1,0 +1,36 @@
+services:
+  db:
+    build: ./postgres
+    container_name: ecole-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "2025"
+      POSTGRES_DB: Ecole
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    container_name: ecole-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/Ecole
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: "2025"
+      # Optionnel: Java opts
+      JAVA_TOOL_OPTIONS: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
+    ports:
+      - "80:80"    # Frontend via Nginx
+      - "8080:8080" # Backend direct (optionnel)
+
+volumes:
+  db_data:

@@ -1,0 +1,23 @@
+# Git
+.git
+.gitmodules
+.github
+
+# Node
+**/node_modules
+**/.npm
+**/.pnpm-store
+**/dist
+
+# Java/Maven
+**/target
+**/.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.vscode
+.idea
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
