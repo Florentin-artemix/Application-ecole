@@ -1,0 +1,6 @@
+[submodule "Ecole-Backend"]
+	path = Ecole-Backend
+	url = https://github.com/Florentin-artemix/Ecole-Backend.git
+[submodule "Ecole-front"]
+	path = Ecole-front
+	url = https://github.com/Florentin-artemix/Ecole-front.git
